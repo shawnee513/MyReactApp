@@ -1,42 +1,25 @@
 import React from 'react';
-import { Greeting } from './Greeting';
-import { PeopleList } from './PeopleList';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { HomePage, CounterButtonPage, PeopleListPage } from './pages';
 import './App.css';
-
-const people = [{
-  name: 'John',
-  age: 40,
-  hairColor: 'brown',
-}, {
-  name: 'Helga',
-  age: 25,
-  hairColor: 'red',
-}, {
-  name: 'Dwayne',
-  age: 55,
-  hairColor: 'blonde',
-}]
 
 function App() {
   
   return (
     <div className="App">
-      <header className="App-header">
-      <Greeting name="Shawnee" numberOfMessages={50} />
-      <PeopleList  people={people} />
-      <button onClick={() => alert('Hello!')}>Click Me!</button>
-        <p>
-          This is so cool!
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+        <Link to="/counter">Go to Counter Page</Link>
+        <Link to="/people-list">Go to People List Page</Link>
+        <Route path="/" exact>
+          <HomePage />
+        </Route>
+        <Route path="/counter">
+          <CounterButtonPage />
+        </Route>
+        <Route path="/people-list">
+          <PeopleListPage />
+        </Route>
+      </Router>
     </div>
   );
 }
