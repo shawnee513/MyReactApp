@@ -9,6 +9,8 @@ import {
   ControlledFormPage,
   UncontrolledFormPage,
 } from './pages';
+import { NavBar } from './NavBar';
+import { FormsNavBar } from './FormsNavBar';
 import './App.css';
 
 function App() {
@@ -16,31 +18,37 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <Link to="/counter">Go to Counter Page</Link>
-        <Link to="/people-list">Go to People List Page</Link>
-        <Switch>
-          <Route path="/" exact>
-            <HomePage />
-          </Route>
-          <Route path="/counter">
-            <CounterButtonPage />
-          </Route>
-          <Route path="/people-list">
-            <PeopleListPage />
-          </Route>
-          <Route path="/protected">
-            <ProtectedPage />
-          </Route>
-          <Route path="/controlled">
-            <ControlledFormPage />
-          </Route>
-          <Route path="/uncontrolled">
-            <UncontrolledFormPage />
-          </Route>
-          <Route>
-            <NotFoundPage />
-          </Route>
-        </Switch>
+        <NavBar />
+        <div className="App-Header">
+          <Switch>
+            <Route path="/" exact>
+              <HomePage />
+            </Route>
+            <Route path="/counter">
+              <CounterButtonPage />
+            </Route>
+            <Route path="/people-list">
+              <PeopleListPage />
+            </Route>
+            <Route path="/protected">
+              <ProtectedPage />
+            </Route>
+            <Route path="/forms">
+              <Router>
+                <FormsNavBar />
+                <Route path="/forms/controlled">
+                  <ControlledFormPage />
+                </Route>
+                <Route path="/forms/uncontrolled">
+                  <UncontrolledFormPage />
+                </Route>
+              </Router>
+            </Route>
+            <Route>
+              <NotFoundPage />
+            </Route>
+          </Switch>
+        </div>
       </Router>
     </div>
   );
